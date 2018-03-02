@@ -16,6 +16,3 @@
               </div>
       <div class="konten"><?php echo $detail['isi_artikel']; ?> </div>
       <?php endforeach ?>
-
-</body>
-</html>

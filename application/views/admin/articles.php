@@ -121,7 +121,7 @@ switch ($this->input->get('action')) {
 <!-- Main content -->
 <section class="content container-fluid">
   <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-11">
       <div class="clearfix" style="padding-bottom: 5px;">
         <a href="?module=articles&action=tambahberita"><button type="button" class="btn pull-right">Create Articles
         </button></a>

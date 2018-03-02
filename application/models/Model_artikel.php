@@ -23,7 +23,7 @@ Class Model_artikel extends CI_Model{
 		$this->db->from('tabelartikel');
 		$this->db->join('tabelgambar', 'tabelartikel.id_artikel = tabelgambar.id_artikel','left');
 		$this->db->order_by('id_artikel', 'DESC');
-		$this->db->limit(5,3);
+		$this->db->limit(3,3);
 		return $this->db->get()->result_array();
 	}
 
@@ -65,14 +65,14 @@ Class Model_artikel extends CI_Model{
 	}
 
 	function show_more($page){
-		$offset = 5*$page;
-		$limit	=5;
+		$offset = 6*$page;
+		$limit	=3;
 		$this->db->select('tabelartikel.id_artikel,tabelartikel.judul_artikel,tabelartikel.isi_artikel,tabelartikel.tanggal_artikel,tabelgambar.nama_gambar');
 		$this->db->from('tabelartikel');
 		$this->db->join('tabelgambar', 'tabelartikel.id_artikel = tabelgambar.id_artikel','left');
 		$this->db->order_by('id_artikel', 'DESC');
-		$this->db->limit($offset,$limit);
-		return $this->db->get()->result_array();		
+		$this->db->limit($limit,$offset);
+		return $this->db->get();	
 	}
 }
 

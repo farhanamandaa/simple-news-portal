@@ -317,6 +317,9 @@ display: inline-block;
 height: 16px;
 padding-left: 20px;
 }
+
+
+
  @media screen and (max-width: 768px) { /*setting mobile mode*/
  	.navbar{
  		padding-left: 0px;

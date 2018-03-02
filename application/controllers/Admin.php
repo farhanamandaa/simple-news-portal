@@ -95,15 +95,19 @@ Class Admin extends CI_Controller {
     }
 
     function delete_articles(){
+        if ($this->session->userdata('status') == FALSE ) {
+            redirect(base_url('admin/login'));
+        }
         $id                         =   $this->input->get('id');
         $image_path                 =   base_url().'assets/uploads/';
-        $query_image                =   $this->db->get_where('tabelgambar',array('id_artikel'=>$id));
-        foreach ($query_image->result() as $record) {
+        $query_image                =   $this->Model_admin->query_images();
+        foreach ($query_image as $record) {
             $filename               =   $image_path.$record->nama_gambar;
             if (file_exists($filename)) {
-                unlink($filename);
+                unlink($filename);  
+                $this->db->delete('tabelgambar',array('id_artikel'=>$id));
             }
-            $this->db->delete('tabelgambar',array('id_artikel'=>$id));
+            
             $this->db->delete('tabelartikel',array('id_artikel'=>$id));
             if ($this->db->affected_rows() > 0) {
                 echo '<script>alert(\'Berhasil menghapus artikel\');history.go(-1);</script>';
@@ -114,6 +118,9 @@ Class Admin extends CI_Controller {
     }
 
     function add_articles() {
+            if ($this->session->userdata('status') == FALSE ) {
+                redirect(base_url('admin/login'));
+            }
             $slug                           = implode('-',(explode(' ',strtolower($this->input->post('judul_artikel')))));
             $post_data                      =   array(
                                             'judul_artikel'     =>  $this->input->post('judul_artikel'),
@@ -138,7 +145,7 @@ Class Admin extends CI_Controller {
                 $data = $this->upload->data();
                 $post_upload                =   array(
                                             'nama_gambar'   =>$data['raw_name'].$data['file_ext'],
-                                            'lokasi' =>$data['raw_name'].$data['file_ext'],
+                                            'lokasi'        =>$data['raw_name'].$data['file_ext'],
                                             'id_artikel'    =>$insert_id);
                 $this->db->insert('tabelgambar',$post_upload);
                 if ($this->db->affected_rows() >0 ) {
@@ -154,6 +161,9 @@ Class Admin extends CI_Controller {
     }
 
     function update_articles(){
+        if ($this->session->userdata('status') == FALSE ) {
+            redirect(base_url('admin/login'));
+        }
         $id                      = $this->input->get('id');
         $slug                    = implode('-',(explode(' ',strtolower($this->input->post('judul_artikel')))));
         // (alternative) preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($this->input->post('judul_artikel')));
@@ -207,6 +217,9 @@ Class Admin extends CI_Controller {
     }
 
     function delete_comment(){
+        if ($this->session->userdata('status') == FALSE ) {
+            redirect(base_url('admin/login'));
+        }
         $id                         =   $this->input->get('id');
         $this->db->delete('tabelkomentar',array('id_komentar'=>$id));
         if ($this->db->affected_rows() > 0) {
@@ -217,6 +230,9 @@ Class Admin extends CI_Controller {
     }
 
     function add_category(){
+        if ($this->session->userdata('status') == FALSE ) {
+            redirect(base_url('admin/login'));
+        }
         $post_data                 =   array(
                                         'nama_kategori' =>  $this->input->post('nama_kategori')
                                     );

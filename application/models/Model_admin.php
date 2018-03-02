@@ -48,5 +48,12 @@ Class Model_admin extends CI_Model {
 		return $this->db->get('tabelkategori')->num_rows();
 	}
 
+	function query_images(){
+		$this->db->select('tabelartikel.id_artikel,tabelgambar.nama_gambar');
+		$this->db->from('tabelartikel');
+		$this->db->join('tabelgambar','tabelartikel.id_artikel = tabelgambar.id_artikel','left');
+		return $this->db->get()->result();
+	}
+
 }
 ?>
