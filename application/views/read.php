@@ -49,7 +49,7 @@
         <h3>Leave a Reply</h3>
         <p>Please reply in my article <font color="red">*</font></p>
         <br>
-        <form method="POST">
+        <form method="POST" action="<?php echo base_url('Praktek/add_comment?id='.$this->uri->segment(2).''); ?>">
             <div class="form-group">
               Nama<br>
               <input type="text" name="nama" placeholder="Name" size="50" ><br>

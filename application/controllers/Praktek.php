@@ -65,4 +65,20 @@ Class Praktek extends CI_Controller {
 		}
 	}
 
+	function add_comment(){
+		$post_comment					=	array(
+											'isi_komentar'		=>	$this->input->post('komentar'),
+											'nama_user'			=>	$this->input->post('nama'),
+											'tanggal_komentar'	=>	date('Y-m-d h:i:sa'),
+											'id_artikel'		=>	$this->input->get('id')
+										);
+		$this->db->insert('tabelkomentar',$post_comment);
+		if ($this->db->affected_rows() > 0) {
+                echo '<script>alert(\'Berhasil menambah komentar\');history.go(-1);</script>';
+        }else {
+                echo '<script>alert(\'Gagal menambah komentar\');history.go(-1);</script>';
+        }
+
+	}
+
 }
