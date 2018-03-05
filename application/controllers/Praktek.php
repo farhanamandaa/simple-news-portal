@@ -37,6 +37,7 @@ Class Praktek extends CI_Controller {
 		$data['data_artikel']	=  $this->Model_artikel->get_article();
 		$data['category']		=  $this->Model_artikel->get_category($id);
 		$data['details']		=  $this->Model_artikel->get_detail($id);
+		$data['comments']		=  $this->Model_artikel->get_comment($id);
 		if (empty($data['details']))
         {
                 show_404();
